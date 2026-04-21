@@ -1,0 +1,29 @@
+<%- include('./layouts/header') %>
+
+    <div class="container mt-4">
+        <%- include('./layouts/messages') %>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center py-5">
+                            <h2 class="text-primary">Welcome to your Dashboard, <%= user.name %>!</h2>
+                            <p class="lead text-muted">What would you like to do today?</p>
+
+                            <div class="mt-4">
+                                <a href="/blogs/create" class="btn btn-success mx-2">Create New Blog</a>
+                                <a href="/blogs" class="btn btn-outline-primary mx-2">View All Blogs</a>
+
+                                <% if(user.role==='Admin' ) { %>
+                                    <hr class="my-4">
+                                    <h5 class="text-info">Admin Controls</h5>
+                                    <a href="/users" class="btn btn-warning mt-2">Manage All Users</a>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <%- include('./layouts/footer') %>

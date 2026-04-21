@@ -1,0 +1,61 @@
+<%- include('./layouts/header') %>
+
+    <div class="container mt-4">
+        <%- include('./layouts/messages') %>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Manage Users</h2>
+                <a href="/dashboard" class="btn btn-outline-secondary">Back to Dashboard</a>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Joined Date</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if(users && users.length> 0) { %>
+                                    <% users.forEach(u=> { %>
+                                        <tr>
+                                            <td class="align-middle">
+                                                <%= u.name %>
+                                            </td>
+                                            <td class="align-middle">
+                                                <%= u.email %>
+                                            </td>
+                                            <td class="align-middle"><span class="badge bg-secondary">
+                                                    <%= u.role %>
+                                                </span></td>
+                                            <td class="align-middle">
+                                                <%= new Date(u.createdAt).toLocaleDateString() %>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <a href="/api/users/delete/<%= u._id %>" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('WARNING: Are you sure you want to delete this user completely?');">
+                                                    Delete User
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="5" class="text-center py-4 text-muted">No regular users
+                                                        found.</td>
+                                                </tr>
+                                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <%- include('./layouts/footer') %>
